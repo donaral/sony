@@ -1,3 +1,4 @@
+
 Given(/^I visit main page$/) do
   visit 'http://www.sony.com/search?query='
 end
@@ -9,14 +10,12 @@ end
 
 Then(/^Results should contain term (.*)$/) do |term|
   page.find('.bd', match: :first).find('.results-p', text: term)
+  #expect(find('.bd', match: :first).find('.results-p')).to have_content( term )
 end
-#results appear in description rather that title of results
-#Search is based on complete string AND each word separately
-#/search?q=mirrorless+camera+OR+mirrorless+wildcard:camera*
 
 Then(/^Picture thumbnail is visible for first result$/) do
   #page.find('.results-list', match: :first).page.has_css?('.media')
-  page.has_css?('.results-list', match: :first)
+  page.has_css?('.results-list', match: :first).page.has_css?('.media')
 end
 
 Then(/^There should be no results to display$/) do
